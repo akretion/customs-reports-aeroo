@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2014 Akretion
+  The licence is in the file __openerp__.py
+-->
+
+<openerp>
+<data>
+
+
+<!--<record id="delivery_carrier_label_colissimo.report_stock_picking_coliposte_cn23" model="ir.actions.report.xml"> -->
+<record id="aeroo_cn23" model="ir.actions.report.xml">
+    <field name="name">CN23 ODT</field>
+    <field name="model">stock.picking</field>
+    <field name="report_name">stock.picking.cn23</field>
+    <field name="report_type">aeroo</field>
+    <field name="in_format">oo-odt</field>
+    <field name="report_rml">cn23_aeroo/cn23.odt</field>
+    <field name="parser_state">loc</field>
+    <field name="parser_loc">cn23_aeroo/cn23.py</field>
+    <field name="tml_source">file</field>
+    <field name="multi" eval="0"/>
+    <field name="attachment_use" eval="0"/>
+    <field name="out_format" ref="report_aeroo.report_mimetypes_odt_odt"/>
+    <field name="fallback_false" eval="0"/>
+    <field name="styles_mode">default</field>
+</record>
+
+<record id="button_report_cn23" model="ir.values"> <!-- Add print button -->
+    <field name="key2">client_print_multi</field>
+    <field name="model">stock.picking</field>
+    <field name="name">CN23 ODT</field>
+    <field name="value" eval="'ir.actions.report.xml,%d'%aeroo_cn23" />
+</record>
+
+
+</data>
+</openerp>
