@@ -62,14 +62,12 @@ class Parser(report_sxw.rml_parse):
                 pack_ops_by_package[line.result_package_id].append(line)
             else:
                 pack_ops_by_package[line.result_package_id] = [line]
-        print "pack_ops_by_package=", pack_ops_by_package
 
         # Build the factorised list of stock move
         factorized_pack_ops_by_package = {}
         # key = package
         # value = {} with key = special key ; value = {'amount': 6.76,
         # 'qty': 5, 'weight_net': 89.8, 'product': product_obj}
-        print "BUILGING factorized_pack_ops_by_package"
         for pack, lines in pack_ops_by_package.iteritems():
             factorized_pack_ops_by_package[pack] = {}
             for line in lines:
@@ -111,7 +109,6 @@ class Parser(report_sxw.rml_parse):
                         'weight_net':
                         line.product_qty * line.product_id.weight_net,
                     }
-        print "factorized_pack_ops_by_package=", factorized_pack_ops_by_package
 
         # Return a dict of factorised stock op
         # key = package_obj
@@ -129,5 +126,4 @@ class Parser(report_sxw.rml_parse):
                 result[pack]['total_weight_net']\
                     += special_values['weight_net']
                 result[pack]['lines'].append(special_values)
-        print "result=", result
         return result
