@@ -9,10 +9,10 @@
 <data>
 
 <!-- Inherit the native CN23 report of the module delivery_carrier_label_colissimo -->
-<record id="delivery_carrier_label_colissimo.report_coliposte_cn23" model="ir.actions.report.xml">
+<record id="delivery_carrier_label_colissimo.report_stock_picking_coliposte_cn23" model="ir.actions.report.xml">
     <field name="name">CN23</field>
-    <field name="model">stock.picking</field>
-    <field name="report_name">delivery_carrier_label_colissimo.report_tpl_coliposte_cn23</field>
+    <field name="model">stock.picking.out</field>
+    <field name="report_name">delivery_carrier_label_colissimo.report_picking_coliposte_cn23</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
     <field name="report_rml">cn23_aeroo/cn23.odt</field>
