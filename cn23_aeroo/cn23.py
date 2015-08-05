@@ -53,7 +53,7 @@ class Parser(report_sxw.rml_parse):
                 (1 - (sale_line.discount or 0.0) / 100.0),
                 precision)
             assert currency_name == \
-                sale_line_id.order_id.currency_id.name,\
+                sale_line.order_id.currency_id.name,\
                 'Wrong currency'
         else:
             discounted_unit_price = move.product_id.list_price
