@@ -14,7 +14,7 @@
     <field name="report_name">stock.eur1</field>
     <field name="report_type">aeroo</field>
     <field name="in_format">oo-odt</field>
-    <field name="report_rml">report_eur1/eur1.odt</field>
+    <field name="report_rml">eur1_aeroo/eur1.odt</field>
     <field name="parser_state">default</field>
     <field name="tml_source">file</field>
     <field name="out_format" ref="report_aeroo.report_mimetypes_odt_odt"/>
