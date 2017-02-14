@@ -2,7 +2,7 @@
 # © 2012-2017 Akretion (www.akretion.com)
 # @author: Alexis de Lattre <alexis.delattre@akretion.com>
 
-from openerp import models, fields, api, _
+from openerp import models, api, _
 from openerp.exceptions import Warning as UserError
 import logging
 logger = logging.getLogger(__name__)
@@ -30,6 +30,14 @@ class StockPicking(models.Model):
                 "The delivery address of the picking %s is located in %s "
                 "which is an EU country, so it doesn't make sense to print "
                 "an EUR.1.") % (self.name, self.partner_id.country_id.name))
+        if not self.company_id.country_id:
+            raise UserError(_(
+                'Missing country on company %s') % self.company_id.name)
+        if not self.company_id.country_id.intrastat:
+            raise UserError(_(
+                "The company '%s' is located in %s which is not an "
+                "EU country, so it is not possible to generate an EUR.1.")
+                % (self.company_id.name, self.company_id.country_id.name))
         res = {}
         # key = (product, lot, order)
         # value: weight
@@ -41,7 +49,6 @@ class StockPicking(models.Model):
             raise UserError(_(
                 "There are no packing operations on picking %s. They are "
                 "generated when the picking is transfered.") % self.name)
-        i = 0
         for pack in self.pack_operation_ids:
             product = pack.product_id
             if not product.origin_country_id:
@@ -74,11 +81,14 @@ class StockPicking(models.Model):
             raise UserError(_(
                 "On picking %s, the are no products made in EU.") % self.name)
         fres = []
+        i = 0
         for (product, lot, uom), qty in res.iteritems():
+            i += 1
             fres.append({
                 'product': product,
                 'lot': lot,
                 'uom': uom,
                 'qty': qty,
+                'seq': i,
                 })
         return fres
